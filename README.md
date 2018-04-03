@@ -3,6 +3,10 @@
 
 ## How to's
 
+### Node JS Documentation
+https://nodejs.org/api/modules.html
+
+
 ### App running on localhost
 https://openclassrooms.com/courses/ultra-fast-applications-using-node-js/creating-your-first-app-with-node-js
 
