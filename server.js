@@ -1,12 +1,21 @@
+
+var express = require('express');
 var http = require('http');
+var fs = require('fs');
+var app = express();
+var path = require('path')
 
-var port = 8888;
+app.use(express.static(__dirname + '/public'));
 
-var server = http.createServer(function(req, res) {
-  console.log("Request was made: " + req.url);
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end("Hello World");
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'public/app/views/index.html'));
 });
 
-server.listen(port);
-console.log("Now listening on port " + port);
+app.listen(8080);
+// http.createServer(function (req, res) {
+//   fs.readFile('index.html', function(err, data) {
+//     res.writeHead(200, {'Content-Type': 'text/html'});
+//     res.write(data);
+//     res.end();
+//   });
+// }).listen(8080);
