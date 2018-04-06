@@ -2,8 +2,9 @@
   "name": "nick_soraia_ebay",
   "version": "1.0.0",
   "description": "https://nodejs.org/api/modules.html",
-  "main": "plugin.js",
+  "main": "server.js",
   "dependencies": {
+    "ejs": "^2.5.8",
     "express": "^4.16.3"
   },
   "devDependencies": {},

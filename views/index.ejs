@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>eBay Search Results</title>
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+  <body>
+    <h1>Search for an item</h1>
+    <form class="" action="items" method="get">
+      <input type="search" id="mySearch" placeholder="Search">
+      <button onclick="myFunction()">Search</button>
+      <p id="demo"></p>
+      <script>
+        function myFunction() {
+            var x = document.getElementById("mySearch").placeholder;
+            document.getElementById("demo").innerHTML = x;
+        }
+      </script>
+    </form>
+  </body>
+</html>
