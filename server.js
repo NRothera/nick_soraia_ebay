@@ -1,5 +1,6 @@
 var express = require('express');
 var itemController = require('./controllers/item_search_controller');
+var searchController = require('./controllers/search_criteria_controller');
 var app = express();
 
 
@@ -7,10 +8,11 @@ var app = express();
 //set up template engine
 app.set('view engine', 'ejs');
 //static files
-app.use('/assets', express.static('assets'));
+app.use(express.static('./public'))
 
 //fire controllers
 itemController(app);
+searchController(app);
 
 
 
