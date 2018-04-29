@@ -1,36 +1,20 @@
 var express = require('express');
+var itemController = require('./controllers/item_search_controller');
 var app = express();
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
-var bodyParser = require('body-parser')
-var port = 8888;
 
-var urlencodedParser = bodyParser.urlencoded({extended: false})
+
+
+//set up template engine
 app.set('view engine', 'ejs');
+//static files
 app.use('/assets', express.static('assets'));
 
-app.get('/', function(req, res) {
-    var data = {age: 24, search: "nintendo"};
-    res.render('index', {data: data, name: req.params.name});
-});
-
-app.get('/index', function(req, res) {
-    res.render('index')
-});
-
-app.post('/index', urlencodedParser, function(req, res){
-  // var searchedItem = req.body;
-  // var itemArray = searchedItem.split(" ");
-  // var joinedWithAnd = itemArray.join(",", "&")
-
-  res.render('item-search', {data:req.body} );
-});
+//fire controllers
+itemController(app);
 
 
-// app.get('/', function(req, res) {
-//     res.render('items');
-// });
 
-app.listen(8888);
-console.log("Now listening on port " + port);
+
+
+app.listen(3000);
+console.log("Now listening on port 3000")
