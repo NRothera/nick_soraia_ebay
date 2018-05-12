@@ -19,9 +19,9 @@
   // Create a JavaScript array of the item filters you want to use in your request
   var filterarray = [
     {"name":"MaxPrice",
-     "value":"200",
+     "value":"25",
      "paramName":"Currency",
-     "paramValue":"GBP"},
+     "paramValue":"USD"},
     {"name":"FreeShippingOnly",
      "value":"true",
      "paramName":"",
@@ -67,7 +67,7 @@
     url += "&RESPONSE-DATA-FORMAT=JSON";
     url += "&callback=_cb_findItemsByKeywords";
     url += "&REST-PAYLOAD";
-    url += "&keywords=harry%20potter";
+    url += "&keywords=" + searchedItem;
     url += "&paginationInput.entriesPerPage=50";
     url += urlfilter;
     // Submit the request

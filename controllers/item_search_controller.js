@@ -17,15 +17,10 @@ module.exports = function(app) {
       res.render('index', {data: data, name: req.params.name});
   });
 
-  app.get('/index', function(req, res) {
-      res.render('index')
-  });
-
-  app.post('/index', urlencodedParser, function(req, res){
+  app.post('/item_search', urlencodedParser, function(req, res){
     // var searchedItem = req.body;
     // var itemArray = searchedItem.split(" ");
     // var joinedWithAnd = itemArray.join(",", "&")
-
     res.render('item_search', {data:req.body} );
   });
 };
