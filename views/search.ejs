@@ -13,16 +13,17 @@
         <link rel="stylesheet" href="/assets/style.css" type="text/css">
   </head>
   <body>
+    <% include partials/item_nav.ejs %>
     <h1>My eBay Search List</h1>
     <div id="ebay_search_table">
-
-      <form>
+      <h3>Example text</h3>
+      <form id="list">
         <input type="text" name="item" value="" placeholder="Add New Item" required />
         <button type="submit" name="button">Add item to search for</button>
       </form>
       <ul>
          <% for(var i=0; i < itemSearches.length; i++){ %>
-           <li><%= itemSearches[i].item %></li>
+           <li class="searchItems"><%= itemSearches[i].item %></li>
            <% } %>
       </ul>
     </div>

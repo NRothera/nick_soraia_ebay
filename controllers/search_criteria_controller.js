@@ -9,10 +9,10 @@ var itemSearchSchema = new mongoose.Schema({
 });
 
 var ItemSearch = mongoose.model('ItemSearch', itemSearchSchema);
-var itemone = ItemSearch({item: 'Nintendo 64'}).save(function(err){
-  if (err) throw err;
-  console.log('item saved');
-});
+// var itemone = ItemSearch({item: 'Nintendo 64'}).save(function(err){
+//   if (err) throw err;
+//   console.log('item saved');
+// });
 
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 

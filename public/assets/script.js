@@ -19,9 +19,9 @@
   // Create a JavaScript array of the item filters you want to use in your request
   var filterarray = [
     {"name":"MaxPrice",
-     "value":"25",
+     "value":"200",
      "paramName":"Currency",
-     "paramValue":"USD"},
+     "paramValue":"GBP"},
     {"name":"FreeShippingOnly",
      "value":"true",
      "paramName":"",
@@ -59,7 +59,7 @@
 
   // Execute the function to build the URL filter
   buildURLArray(filterarray);
-  var url = "http://svcs.ebay.com/services/search/FindingService/v1";
+  var url = "http://svcs.ebay.co.uk/services/search/FindingService/v1";
     url += "?OPERATION-NAME=findItemsByKeywords";
     url += "&SERVICE-VERSION=1.0.0";
     url += "&SECURITY-APPNAME=soraiaca-plugin-PRD-253bf921e-d4d9cb10";

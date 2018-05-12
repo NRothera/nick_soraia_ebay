@@ -1,14 +1,14 @@
 $(document).ready(function(){
 
-  $('form').on('submit', function(){
-      
+  $('#list').on('submit', function(){
+
       var item = $('form input');
       var search = {item: item.val()};
-      console.log(wanted_item)
+      console.log(search)
       $.ajax({
         type: 'POST',
         url: '/search',
-        data: search,
+        data: item,
         success: function(data){
           //do something with the data via front-end framework
           location.reload();
