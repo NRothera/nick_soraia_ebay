@@ -13,8 +13,8 @@ var todoSchema = new mongoose.Schema({
 module.exports = function(app) {
 
   app.get('/', function(req, res) {
-      var data = {age: 24, search: "nintendo"};
-      res.render('index', {data: data, name: req.params.name});
+      
+      res.render('index');
   });
 
   app.post('/item_search', urlencodedParser, function(req, res){
