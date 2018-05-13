@@ -2,13 +2,13 @@ $(document).ready(function(){
 
   $('#list').on('submit', function(){
 
-      var item = $('form input');
+      var item = $('#list input');
       var search = {item: item.val()};
       console.log(search)
       $.ajax({
         type: 'POST',
         url: '/search',
-        data: item,
+        data: search,
         success: function(data){
           //do something with the data via front-end framework
           location.reload();
