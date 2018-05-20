@@ -2,11 +2,13 @@ body {
   font-family: "Playfair Display";
   color: #989898;
   margin: 0;
+  background-image: url("https://en.wikipedia.org/wiki/Dog#/media/File:Collage_of_Nine_Dogs.jpg");
 }
 
 a {
   font-size: 16px;
 }
+
 
 h1 {
   color: #777;n
