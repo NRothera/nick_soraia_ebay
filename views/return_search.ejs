@@ -9,14 +9,9 @@
     <% include partials/item_nav.ejs %>
     <div id="results"></div>
     <script>
-    mongoose.connect("mongodb://ebayTest:ebayTest1@ds261929.mlab.com:61929/ebay-db");
 
-    var itemSearchSchema = new mongoose.Schema({
-      item: String
-    });
-
-    var ItemSearch = mongoose.model('ItemSearch', itemSearchSchema);
-    
+      var searchedItem = <%- JSON.stringify(data.item) %>;
+    </script>
     </script>
 
     <script type="text/javascript" src="/scripts/return_search_api.js"></script>
