@@ -38,6 +38,14 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/return_api', urlencodedParser, function(req, res) {
+    ItemSearch.find({"item": 'Nintendo 64'}, function(err, data){
+    if (err) throw err;
+    res.render('return_search', {item:req.body});
+
+    });
+  });
+
   app.post('/search', urlencodedParser, function(req, res){
     // get data from the view, add it to mongodb
     var newItemSearch = ItemSearch(req.body).save(function(err, data){
