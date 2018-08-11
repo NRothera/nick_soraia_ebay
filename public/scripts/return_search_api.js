@@ -1,6 +1,7 @@
 var schedule = require('node-schedule');
 var http = require('http')
 var axios = require('axios');
+var items = require('../../controllers/search_criteria_controller')
 
   var rule = new schedule.RecurrenceRule();
 
@@ -68,8 +69,9 @@ var axios = require('axios');
         }
       }
     }  // End buildURLArray() function
-
+    var searchedItem = "Zelda";
     // Execute the function to build the URL filter
+
     buildURLArray(filterarray);
     var ebay_api = "http://svcs.ebay.co.uk/services/search/FindingService/v1";
       ebay_api += "?OPERATION-NAME=findItemsByKeywords";
@@ -77,10 +79,10 @@ var axios = require('axios');
       ebay_api += "&SECURITY-APPNAME=soraiaca-plugin-PRD-253bf921e-d4d9cb10";
       ebay_api += "&GLOBAL-ID=EBAY-GB";
       ebay_api += "&RESPONSE-DATA-FORMAT=JSON";
-      ebay_api += "&callback=_cb_findItemsByKeywords";
+      //ebay_api += "&callback=_cb_findItemsByKeywords";
       ebay_api += "&REST-PAYLOAD";
       // url += "&keywords=" + searchedItem;
-      ebay_api += "&keywords=" + "zelda";
+      ebay_api += "&keywords=" + "link";
       ebay_api += "&paginationInput.entriesPerPage=50";
       ebay_api += urlfilter;
       // Submit the request
@@ -91,8 +93,9 @@ var axios = require('axios');
       get_api_results = (function(){
         axios.get(ebay_api)
     .then(response => {
-      console.log(response)
-      console.log(response.data[0]["findItemsByKeywordsResponse"])
+      // console.log(response)
+      // console.log(ebay_api)
+      console.log(JSON.stringify(response.data,null,4))
       var api_results = response.data["findItemsByKeywordsResponse"]
     })
     .catch(error => {

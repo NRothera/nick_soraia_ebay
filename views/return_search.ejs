@@ -9,7 +9,9 @@
     <% include partials/item_nav.ejs %>
     <div id="results"></div>
     <script>
-      var searchedItemList = <%- JSON.stringify(data.item) %>;
+
+      var searchedItem = <%- JSON.stringify(data.item) %>;
+    </script>
     </script>
 
     <script type="text/javascript" src="/scripts/return_search_api.js"></script>
