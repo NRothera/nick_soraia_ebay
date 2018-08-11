@@ -80,7 +80,7 @@ var axios = require('axios');
       ebay_api += "&callback=_cb_findItemsByKeywords";
       ebay_api += "&REST-PAYLOAD";
       // url += "&keywords=" + searchedItem;
-      ebay_api += "&keywords=" + "zelda";
+      ebay_api += "&keywords=" + ItemSearch;
       ebay_api += "&paginationInput.entriesPerPage=50";
       ebay_api += urlfilter;
       // Submit the request
