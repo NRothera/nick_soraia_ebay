@@ -25,7 +25,7 @@ var items = require('../../controllers/search_criteria_controller')
         }
 
       }
-      console.log(item)
+      // console.log(item)
       html.push('</tbody></table>');
       document.getElementById("results").innerHTML = html.join("");
     }  // End _cb_findItemsByKeywords() function
@@ -34,7 +34,7 @@ var items = require('../../controllers/search_criteria_controller')
       {"name":"MaxPrice",
        "value":"25",
        "paramName":"Currency",
-       "paramValue":"USD"},
+       "paramValue":"GBP"},
       {"name":"FreeShippingOnly",
        "value":"true",
        "paramName":"",
@@ -82,7 +82,7 @@ var items = require('../../controllers/search_criteria_controller')
       //ebay_api += "&callback=_cb_findItemsByKeywords";
       ebay_api += "&REST-PAYLOAD";
       // url += "&keywords=" + searchedItem;
-      ebay_api += "&keywords=" + "link";
+      ebay_api += "&keywords=" + "gameboy";
       ebay_api += "&paginationInput.entriesPerPage=50";
       ebay_api += urlfilter;
       // Submit the request
@@ -93,10 +93,40 @@ var items = require('../../controllers/search_criteria_controller')
       get_api_results = (function(){
         axios.get(ebay_api)
     .then(response => {
+      var index = 0;
       // console.log(response)
       // console.log(ebay_api)
-      console.log(JSON.stringify(response.data,null,4))
-      var api_results = response.data["findItemsByKeywordsResponse"]
+      // console.log(JSON.stringify(response.data,null,4))
+      var api_results = response.data["findItemsByKeywordsResponse"][0]["searchResult"][0]["item"]
+
+      // console.log(api_results[1]["listingInfo"])
+     
+      
+
+      // this command below allows you to filter by category
+    
+      var result_object = {}
+      // console.log(api_results)
+      // console.log(api_results[0]["condition"][0]["conditionDisplayName"])
+
+      for (var results of api_results){
+        priceJson = api_results[index]["sellingStatus"][0]["currentPrice"][0];
+        price = 0 
+        Object.keys(priceJson).forEach(function(key) {
+          if (priceJson[key] != "GBP"){
+            price = priceJson[key]
+          }
+          
+        })
+        // console.log(price)
+      result_object[index] = {"itemId":api_results[index]["itemId"][0], "title": api_results[index]["title"][0],
+      "image":api_results[index]["galleryURL"][0], "bestOffer": api_results[index]["listingInfo"][0]["bestOfferEnabled"][0], "price": "£" + price,
+      "buyNow": api_results[index]["listingInfo"][0]["buyItNowAvailable"][0], "endDate": api_results[index]["listingInfo"][0]["endTime"][0], 
+      "condition": api_results[index]["condition"][0]["conditionDisplayName"][0]};
+        index += 1
+      }
+      console.log(result_object)
+    
     })
     .catch(error => {
       console.log(error);
