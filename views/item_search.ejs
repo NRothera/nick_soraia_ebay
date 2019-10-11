@@ -4,13 +4,16 @@
     <meta charset="utf-8">
     <title>eBay Search Results</title>
     <link rel="stylesheet" href="/assets/style.css">
+    <script type="text/javascript" src="/scripts/script.js"></script>
   </head>
   <body>
     <% include partials/item_nav.ejs %>
     <div id="results"></div>
-    <script>
-      var searchedItem = <%- JSON.stringify(data.item) %>;
-    </script>
-    <script type="text/javascript" src="/scripts/script.js"></script>
+    <% get_api_results %>
+      
+
+                
+      
+
   </body>
 </html>

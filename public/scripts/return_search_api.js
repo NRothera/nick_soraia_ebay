@@ -1,13 +1,7 @@
-var schedule = require('node-schedule');
 var http = require('http')
 var axios = require('axios');
 var items = require('../../controllers/search_criteria_controller')
 
-  var rule = new schedule.RecurrenceRule();
-
-  rule.minute = new schedule.Range(0, 59, 5);
-
-   schedule.scheduleJob(rule, exports.scheduleSearch = function(){
 
   // Parse the response and build an HTML table to display search results
     function _cb_findItemsByKeywords(root) {
@@ -28,7 +22,8 @@ var items = require('../../controllers/search_criteria_controller')
       // console.log(item)
       html.push('</tbody></table>');
       document.getElementById("results").innerHTML = html.join("");
-    }  // End _cb_findItemsByKeywords() function
+    }  
+    // End _cb_findItemsByKeywords() function
     // Create a JavaScript array of the item filters you want to use in your request
     var filterarray = [
       {"name":"MaxPrice",
@@ -70,6 +65,8 @@ var items = require('../../controllers/search_criteria_controller')
       }
     }  // End buildURLArray() function
     var searchedItem = "Zelda";
+    var result_object = {}
+
     // Execute the function to build the URL filter
 
     buildURLArray(filterarray);
@@ -90,7 +87,8 @@ var items = require('../../controllers/search_criteria_controller')
       // s.src= url;
       // document.body.appendChild(s);
 
-      get_api_results = (function(){
+  // This function grabs the api results
+    exports.get_api_results = function(){
         axios.get(ebay_api)
     .then(response => {
       var index = 0;
@@ -99,13 +97,8 @@ var items = require('../../controllers/search_criteria_controller')
       // console.log(JSON.stringify(response.data,null,4))
       var api_results = response.data["findItemsByKeywordsResponse"][0]["searchResult"][0]["item"]
 
-      // console.log(api_results[1]["listingInfo"])
-     
-      
-
       // this command below allows you to filter by category
     
-      var result_object = {}
       // console.log(api_results)
       // console.log(api_results[0]["condition"][0]["conditionDisplayName"])
 
@@ -126,11 +119,13 @@ var items = require('../../controllers/search_criteria_controller')
         index += 1
       }
       console.log(result_object)
-    
+      return result_object
     })
     .catch(error => {
       console.log(error);
     });
-  })();
 
-    });
+  }
+
+
+ 
