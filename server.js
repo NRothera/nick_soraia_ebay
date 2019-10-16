@@ -11,7 +11,7 @@ var search = require('./public/scripts/return_search_api');
 
 //    schedule.scheduleJob(rule, exports.scheduleSearch = (function() {
 
-search.get_api_results()
+ var filtered_result = search.getAndFilterApi()
 
     // })();    
 
@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('./public'))
 // app.use('/scripts', express.static(__dirname + '/public/'));
 //fire controllers
-itemController(app);
+itemController(app, filtered_result);
 searchController(app);
 
 

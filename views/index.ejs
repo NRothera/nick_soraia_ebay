@@ -5,13 +5,30 @@
     <title>eBay Search Results</title>
     <link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
     <link rel="stylesheet" href="/assets/style.css">
+    <script type="module" src="/scripts/return_search_api.js"></script>
   
-    <script type="text/javascript" src="/scripts/return_search_api.js"></script>
 
   </head>
   <body>
       <% include partials/item_nav.ejs %>
-
+      <div class="body-content">
+        <% console.log("I'm in the index file") %>
+        <% console.log(result[0].title) %>
+        <!-- <h1>sup<%- JSON.stringify(result[0].title) %></h1> -->
+        <div>
+          <%  Object.keys(result).forEach(function(key) { %>
+       
+          
+          <h1><%- JSON.stringify(result[key].title)%></h1>
+          <img src=<%-JSON.stringify(result[key].image)%> alt="">
+            <a href=<%- JSON.stringify(result[key].url)%>>View item in Ebay</a>
+            <p><%- JSON.stringify(result[key].itemId)%></p>
+          <% }); %>
+        </div>
+          
+       
+        
+    </div>
       <!-- <script>
         function myFunction() {
             var x = document.getElementById("mySearch").placeholder;
@@ -20,4 +37,5 @@
       </script> -->
 
   </body>
+
 </html>
