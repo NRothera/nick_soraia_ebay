@@ -62,7 +62,7 @@ var items = require('../../controllers/search_criteria_controller')
       //ebay_api += "&callback=_cb_findItemsByKeywords";
       ebay_api += "&REST-PAYLOAD";
       // url += "&keywords=" + searchedItem;
-      ebay_api += "&keywords=" + "n64%20new";
+      ebay_api += "&keywords=" + "sealed n64";
       ebay_api += "&paginationInput.entriesPerPage=30";
       ebay_api += "&sortOrder=StartTimeNewest";
       ebay_api += urlfilter;
