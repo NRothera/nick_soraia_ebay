@@ -186,3 +186,20 @@ ul{
   margin-bottom: 0;
   text-indent: -10000px;
 } */
+
+.abovePrice{
+
+  
+  position: relative;
+}
+
+.belowImage{
+ 
+ 
+position: relative;
+
+}
+
+.contents {
+  height:300px;
+}
