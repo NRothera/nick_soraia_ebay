@@ -15,9 +15,8 @@ module.exports = function(app, filteredResult) {
 
   app.get('/', function(req, res) {
 
-    // var result = filteredApi.getAndFilterApi();
     console.log("hello this is the result")
-      console.log(filteredResult)
+      // console.log("hello" + JSON.stringify(filteredResult))
       res.render('index', {result: filteredResult});
   });
 

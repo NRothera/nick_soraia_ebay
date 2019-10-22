@@ -11,7 +11,7 @@ var search = require('./public/scripts/return_search_api');
 
 //    schedule.scheduleJob(rule, exports.scheduleSearch = (function() {
 
- var filtered_result = search.getAndFilterApi()
+ var filtered_result = search.getAndFilterApi(["AU", "FR", "ES", "GB"])
 
     // })();    
 

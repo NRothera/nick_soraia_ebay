@@ -71,69 +71,82 @@ var items = require('../../controllers/search_criteria_controller')
       // document.body.appendChild(s);
 
   // This function grabs the api results
-  exports.getAndFilterApi = function(){
+  exports.getAndFilterApi = function(countries){
+    var results_by_country = []
     var result_object = {}
-
     // Execute the function to build the URL filter
 
     buildURLArray(filterarray);
-    
-    var ebay_api = "http://svcs.ebay.co.uk/services/search/FindingService/v1";
+    var api_urls = []
+
+    for (let index = 0; index < countries.length; index++) {
+      var ebay_api = "http://svcs.ebay.co.uk/services/search/FindingService/v1";
       ebay_api += "?OPERATION-NAME=findItemsByKeywords";
       ebay_api += "&SERVICE-VERSION=1.0.0";
       ebay_api += "&SECURITY-APPNAME=soraiaca-plugin-PRD-253bf921e-d4d9cb10";
-      ebay_api += "&GLOBAL-ID=EBAY-GB";
+      ebay_api += "&GLOBAL-ID=EBAY-" + countries[index];
       ebay_api += "&RESPONSE-DATA-FORMAT=JSON";
       //ebay_api += "&callback=_cb_findItemsByKeywords";
       ebay_api += "&REST-PAYLOAD";
       // url += "&keywords=" + searchedItem;
       ebay_api += "&keywords=" + "sealed n64";
-      ebay_api += "&paginationInput.entriesPerPage=30";
+      ebay_api += "&paginationInput.entriesPerPage=5";
       ebay_api += "&sortOrder=StartTimeNewest";
       ebay_api += urlfilter;
+      api_urls.push(ebay_api)
+    }
     // function getAndFilterApi(){
     
-  
     // exports.get_api_results = function(){
-      axios.get(ebay_api)
-    .then(response => {
-      var index = 0;
-      var ids = []
-      var api_results = response.data["findItemsByKeywordsResponse"][0]["searchResult"][0]["item"]
-
-      console.log(api_results);
-      for (var results of api_results){
-        var result = api_results[index]
-        priceJson = result["sellingStatus"][0]["currentPrice"][0];
-        price = 0 
-        Object.keys(priceJson).forEach(function(key) {
-          if (priceJson[key] != "GBP"){
-            price = priceJson[key]
-          }
-          
-        })
-        if (ids.includes(result["itemId"][0])){
-          continue;
-        }
-        else{
-          result_object[index] = {"itemId":result["itemId"][0], "title": result["title"][0],
-        "image":result["galleryURL"][0], "bestOffer": result["listingInfo"][0]["bestOfferEnabled"][0], "price": "£" + price,
-        "buyNow": result["listingInfo"][0]["buyItNowAvailable"][0], "endDate": result["listingInfo"][0]["endTime"][0], 
-        "condition": result["condition"][0]["conditionDisplayName"][0], "url": result["viewItemURL"][0]};
-        ids.push(result["itemId"][0])
-
-        }
-        // console.log(price)
-        index += 1
+    for (let countryIndex = 0; countryIndex < api_urls.length; countryIndex++) {
       
-      }
-      // console.log(result_object)
-      return result_object
-    })
-    .catch(error => {
-      console.log(error);
-    });
-    return result_object;
+      
+      axios.get(api_urls[countryIndex])
+    
+
+      .then(response => {
+
+        var index = 0;
+        var ids = []
+        var api_results = response.data["findItemsByKeywordsResponse"][0]["searchResult"][0]["item"]
+
+        for (var results of api_results){
+          var result = api_results[index]
+          priceJson = result["sellingStatus"][0]["currentPrice"][0];
+          price = 0 
+          Object.keys(priceJson).forEach(function(key) {
+              price = priceJson[key]
+            })
+            
+          // Makes sure no duplicates are being added to the results
+          if (ids.includes(result["itemId"][0])){
+            continue;
+          }
+          else{
+            result_object[index] = { "countryCode": countries[countryIndex], "itemId":result["itemId"][0], "title": result["title"][0],
+          "image":result["galleryURL"][0], "bestOffer": result["listingInfo"][0]["bestOfferEnabled"][0], "price": price,
+          "buyNow": result["listingInfo"][0]["buyItNowAvailable"][0], "endDate": result["listingInfo"][0]["endTime"][0], 
+          "condition": result["condition"][0]["conditionDisplayName"][0], "url": result["viewItemURL"][0]};
+          ids.push(result["itemId"][0])
+          
+          }
+          // console.log(price)
+          index += 1
+        
+        }
+        results_by_country.push(result_object)
+        result_object = {}
+      //  console.log(results_by_country)
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    }
+    return results_by_country;
+    // console.log(results_by_country)
+
  
 }
 
