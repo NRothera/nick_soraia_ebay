@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-  $('form').on('submit', function(){
-      
-      var item = $('form input');
+  $('#list').on('submit', function(){
+
+      var item = $('#list input');
       var search = {item: item.val()};
-      console.log(wanted_item)
+      console.log(search)
       $.ajax({
         type: 'POST',
         url: '/search',
@@ -19,7 +19,7 @@ $(document).ready(function(){
 
   });
 
-  $('li').on('click', function(){
+  $('.searchItems').on('click', function(){
 
       var item = $(this).text().replace(/ /g, "-");
       $.ajax({

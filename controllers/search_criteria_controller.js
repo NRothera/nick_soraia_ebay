@@ -1,18 +1,18 @@
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
 // Connecting to the database
-mongoose.connect("mongodb://ebayTest:ebayTest1@ds261929.mlab.com:61929/ebay-db")
+mongoose.connect("mongodb://ebayTest:ebayTest1@ds261929.mlab.com:61929/ebay-db");
 
 var itemSearchSchema = new mongoose.Schema({
   item: String
 });
 
 var ItemSearch = mongoose.model('ItemSearch', itemSearchSchema);
-var itemone = ItemSearch({item: 'Nintendo 64'}).save(function(err){
-  if (err) throw err;
-  console.log('item saved');
-});
+// var itemone = ItemSearch({item: 'Nintendo 64'}).save(function(err){
+//   if (err) throw err;
+//   console.log('item saved');
+// });
 
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 
