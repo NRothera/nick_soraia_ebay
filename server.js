@@ -32,5 +32,6 @@ storeResults.write_to_results(filtered_result);
 
 
 
-// app.listen(8989);
-// console.log("Now listening on port 8989")
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
