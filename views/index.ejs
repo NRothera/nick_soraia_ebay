@@ -13,7 +13,6 @@
       <% include partials/item_nav.ejs %>
       <div class="body-content">
         <!-- <% console.log("I'm in the index file") %> -->
-        <% console.log(JSON.stringify(result[0])) %>
 
         <table>
           <div>
@@ -22,16 +21,12 @@
               <th><h2><%- JSON.stringify(result[countriesIndex][0].countryCode) %></h2></th>
               <tr class="contents">
                 <%  Object.keys(result[countriesIndex]).forEach(function(key) { %>
-                  <% console.log("This is the key:" + JSON.stringify(result[countriesIndex][key])) %>
                   <th><%- JSON.stringify(result[countriesIndex][key].title)%></th>
-                  <div>
-                  <td><img class="abovePrice" src=<%-JSON.stringify(result[countriesIndex][key].image)%> alt=""></td>
+                  <td><a href=<%- JSON.stringify(result[countriesIndex][key].url)%></a><img  class="image" src=<%-JSON.stringify(result[countriesIndex][key].image)%> alt=""></a>
+                  <div class="price">
+                  <%- JSON.stringify(result[countriesIndex][key].price) %></td>
                   </div>
-
-                  <div>
-                  <td class="belowImage" ><%- JSON.stringify(result[countriesIndex][key].price) %></td>
-                  </div>
-                  <td><a href=<%- JSON.stringify(result[countriesIndex][key].url)%>>View item in Ebay</a></td>
+                  
                 <% }); %>
               </tr>
               <% countriesIndex += 1 %>

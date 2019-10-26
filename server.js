@@ -4,6 +4,7 @@ var itemController = require('./controllers/item_search_controller');
 var searchController = require('./controllers/search_criteria_controller');
 var app = express();
 var search = require('./public/scripts/return_search_api');
+var storeResults = require('./public/scripts/write_to_results')
 
 //  var rule = new schedule.RecurrenceRule();
 
@@ -11,8 +12,9 @@ var search = require('./public/scripts/return_search_api');
 
 //    schedule.scheduleJob(rule, exports.scheduleSearch = (function() {
 
- var filtered_result = search.getAndFilterApi(["AU", "FR", "ES", "GB", "US", "IT"])
+ var filtered_result = search.getAndFilterApi(["AU", "FR", "ES", "GB", "US"]);
 
+ storeResults.write_to_results(filtered_result);
     // })();    
 
 //set up template engine

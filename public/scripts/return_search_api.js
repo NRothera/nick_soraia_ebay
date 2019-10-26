@@ -50,21 +50,8 @@ var items = require('../../controllers/search_criteria_controller')
 
     // Execute the function to build the URL filter
 
-    buildURLArray(filterarray);
     
-    var ebay_api = "http://svcs.ebay.co.uk/services/search/FindingService/v1";
-      ebay_api += "?OPERATION-NAME=findItemsByKeywords";
-      ebay_api += "&SERVICE-VERSION=1.0.0";
-      ebay_api += "&SECURITY-APPNAME=soraiaca-plugin-PRD-253bf921e-d4d9cb10";
-      ebay_api += "&GLOBAL-ID=EBAY-GB";
-      ebay_api += "&RESPONSE-DATA-FORMAT=JSON";
-      //ebay_api += "&callback=_cb_findItemsByKeywords";
-      ebay_api += "&REST-PAYLOAD";
-      // url += "&keywords=" + searchedItem;
-      ebay_api += "&keywords=" + "sealed n64";
-      ebay_api += "&paginationInput.entriesPerPage=30";
-      ebay_api += "&sortOrder=StartTimeNewest";
-      ebay_api += urlfilter;
+  
       // Submit the request
       // s=document.createElement('script'); // create script element
       // s.src= url;

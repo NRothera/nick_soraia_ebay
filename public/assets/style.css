@@ -187,19 +187,13 @@ ul{
   text-indent: -10000px;
 } */
 
-.abovePrice{
-
-  
-  position: relative;
+            
+.price {
+  position: absolute;
+  padding-left: 50px;
 }
 
-.belowImage{
- 
- 
-position: relative;
-
+.image{
+  padding-right: 30px;
 }
 
-.contents {
-  height:300px;
-}
