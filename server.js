@@ -14,7 +14,6 @@ var storeResults = require('./public/scripts/write_to_results')
 
  var filtered_result = search.getAndFilterApi(["AU", "FR", "ES", "GB", "US"]);
 
- storeResults.write_to_results(filtered_result);
     // })();    
 
 //set up template engine
@@ -25,6 +24,11 @@ app.use(express.static('./public'))
 //fire controllers
 itemController(app, filtered_result);
 searchController(app);
+if (false) {
+
+
+storeResults.write_to_results(filtered_result);
+}
 
 
 
