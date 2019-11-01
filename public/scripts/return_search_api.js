@@ -61,6 +61,7 @@ var items = require('../../controllers/search_criteria_controller')
   exports.getAndFilterApi = function(countries){
     var results_by_country = []
     var result_object = {}
+  
     // Execute the function to build the URL filter
 
     buildURLArray(filterarray);
@@ -96,6 +97,7 @@ var items = require('../../controllers/search_criteria_controller')
         var index = 0;
         var ids = []
         var api_results = response.data["findItemsByKeywordsResponse"][0]["searchResult"][0]["item"]
+        var temp_results = []
 
         for (var results of api_results){
           var result = api_results[index]
@@ -110,19 +112,23 @@ var items = require('../../controllers/search_criteria_controller')
             continue;
           }
           else{
-            result_object[index] = { "countryCode": countries[countryIndex], "itemId":result["itemId"][0], "title": result["title"][0],
+
+             temp_results.push({"id": result["itemId"][0], "title": result["title"][0],
           "image":result["galleryURL"][0], "bestOffer": result["listingInfo"][0]["bestOfferEnabled"][0], "price": price,
           "buyNow": result["listingInfo"][0]["buyItNowAvailable"][0], "endDate": result["listingInfo"][0]["endTime"][0], 
-          "condition": result["condition"][0]["conditionDisplayName"][0], "url": result["viewItemURL"][0]};
+          "condition": result["condition"][0]["conditionDisplayName"][0], "url": result["viewItemURL"][0]});
           ids.push(result["itemId"][0])
-          
+            // console.log(result_object)
           }
           // console.log(price)
           index += 1
         
         }
+        result_object[countries[countryIndex]] = temp_results
+        temp_results = []
+
+        // console.log(result_object)
         results_by_country.push(result_object)
-        result_object = {}
       //  console.log(results_by_country)
 
       })
@@ -131,7 +137,9 @@ var items = require('../../controllers/search_criteria_controller')
       });
 
     }
-    return results_by_country;
+    // console.log(result_object)
+
+    return result_object;
     // console.log(results_by_country)
 
  

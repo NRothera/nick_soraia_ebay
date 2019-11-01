@@ -12,25 +12,30 @@
   <body>
       <% include partials/item_nav.ejs %>
       <div class="body-content">
-        <!-- <% console.log("I'm in the index file") %> -->
 
         <table>
           <div>
+            
             <% var countriesIndex = 0 %>
-            <% while (countriesIndex < result.length) { %> 
-              <th><h2><%- JSON.stringify(result[countriesIndex][0].countryCode) %></h2></th>
-              <tr class="contents">
-                <%  Object.keys(result[countriesIndex]).forEach(function(key) { %>
-                  <th><%- JSON.stringify(result[countriesIndex][key].title)%></th>
-                  <td><a href=<%- JSON.stringify(result[countriesIndex][key].url)%></a><img  class="image" src=<%-JSON.stringify(result[countriesIndex][key].image)%> alt=""></a>
+            <% while (countriesIndex < countries.length) { %>
+              <% var country = countries[countriesIndex] %>
+              <tr>
+
+                <% for (var index = 0; index < result[country]; index++) %>
+                <th><h1><%-country%></h1></th>
+                <%  Object.keys(result[country]).forEach(function(key) { %>
+                
+                  <th><%- JSON.stringify(result[country][key].title)%></th>
+                  <td><a href=<%- JSON.stringify(result[country][key].url)%></a><img  class="image" src=<%-JSON.stringify(result[country][key].image)%> alt=""></a>
                   <div class="price">
-                  <%- JSON.stringify(result[countriesIndex][key].price) %></td>
+                  <%- JSON.stringify(result[country][key].price) %></td>
                   </div>
-                  
                 <% }); %>
               </tr>
+              
               <% countriesIndex += 1 %>
-          <% } %> 
+            <% } %>
+          
 
         </div>
       </table>

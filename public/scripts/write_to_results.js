@@ -1,10 +1,65 @@
+var fs = require('fs');
+var previousResults = require("../../results.json")
 
-exports.write_to_results = function(results) {
-    console.log("in write the results file" + results)
-    var resultsJson = JSON.stringify(results[0])
-    var fs = require('fs');
-    fs.writeFile('results.json', resultsJson, (err) => {
+
+write_to_results = function(results) {
+    var resultsJson = JSON.stringify(results)
+    fs.writeFileSync('results.json', resultsJson, (err) => {
         if (err) throw err;
         console.log('Data written to file');
     });
+}
+
+get_json_results = function() {
+    let rawdata = fs.readFileSync("/Users/nicolasrothera/Projects/nick_soraia_ebay/results.json");
+    let results = JSON.parse(rawdata);
+    return results
+}
+
+
+compare_two_objects = function(obj1, obj2, countries) {
+    var flag=true;
+
+    if(Object.keys(obj1).length===  Object.keys(obj2).length){
+        for (var countryIndex = 0; countryIndex < countries.length; countryIndex++ ) {
+            var country = countries[countryIndex];
+            console.log("In the loop")
+
+                for(key in obj1[country][0]) {
+
+
+                    if(obj1[country][0][key] == obj2[country][0][key]) {
+                        console.log(obj1[country][0][key])
+                        
+                        continue;
+
+                    }
+                    else {
+                        console.log(obj1[country][0][key])
+                        console.log(obj2[country][0][key])
+
+                        flag=false;
+                    }
+                    
+                }
+                
+            }
+        
+    }
+    else {
+        flag=false;
+    }
+    return flag
+}
+
+exports.write_to_results_if_new_item = function(current_results, countries) {
+    var previous_results = get_json_results();
+    var same_results = compare_two_objects(current_results, previous_results, countries)
+
+    if (same_results === true) {
+        console.log("you got lucky mate")
+    } else{
+        write_to_results(current_results)
+    }
+    
 }

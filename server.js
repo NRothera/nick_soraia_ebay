@@ -4,15 +4,15 @@ var itemController = require('./controllers/item_search_controller');
 var searchController = require('./controllers/search_criteria_controller');
 var app = express();
 var search = require('./public/scripts/return_search_api');
-var storeResults = require('./public/scripts/write_to_results')
 
+var countryList = ["AU", "FR", "ES", "GB", "US"]
 //  var rule = new schedule.RecurrenceRule();
 
 //   rule.minute = new schedule.Range(0, 59, 5);
 
 //    schedule.scheduleJob(rule, exports.scheduleSearch = (function() {
 
- var filtered_result = search.getAndFilterApi(["AU", "FR", "ES", "GB", "US"]);
+ var filtered_result = search.getAndFilterApi(countryList);
 
     // })();    
 
@@ -22,12 +22,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('./public'))
 // app.use('/scripts', express.static(__dirname + '/public/'));
 //fire controllers
-itemController(app, filtered_result);
+itemController(app, filtered_result, countryList);
 searchController(app);
 if (false) {
 
 
-storeResults.write_to_results(filtered_result);
 }
 
 
