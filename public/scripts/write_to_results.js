@@ -20,33 +20,26 @@ get_json_results = function() {
 compare_two_objects = function(obj1, obj2, countries) {
     var flag=true;
 
-    if(Object.keys(obj1).length===  Object.keys(obj2).length){
+    if(Object.keys(obj1).length ===  Object.keys(obj2).length){
         for (var countryIndex = 0; countryIndex < countries.length; countryIndex++ ) {
             var country = countries[countryIndex];
-            console.log("In the loop")
-
-                for(key in obj1[country][0]) {
-
-
-                    if(obj1[country][0][key] == obj2[country][0][key]) {
-                        console.log(obj1[country][0][key])
-                        
-                        continue;
-
-                    }
-                    else {
-                        console.log(obj1[country][0][key])
-                        console.log(obj2[country][0][key])
-
+         
+            for (let index = 0; index < obj1[country].length; index++) {
+                
+                console.log(obj2[country])
+                for(key in obj1[country][index]) {
+                    if(obj1[country][index][key] != obj2[country][index][key]) {
+                       
                         flag=false;
                     }
-                    
+                   
                 }
-                
             }
+        }
         
     }
     else {
+        console.log("in the other else statement")
         flag=false;
     }
     return flag
