@@ -17,29 +17,24 @@ get_json_results = function() {
 
 compare_two_objects = function(obj1, obj2, countries) {
     var flag=true;
+    var differenceResults = []
 
-    if(Object.keys(obj1).length ===  Object.keys(obj2).length){
-        for (var countryIndex = 0; countryIndex < countries.length; countryIndex++ ) {
-            var country = countries[countryIndex];
-            for (let index = 0; index < obj1[country].length; index++) {
-                console.log(obj2[country])
-                for(key in obj1[country][index]) {
-                    if(obj1[country][index][key] != obj2[country][index][key]) {
-                        console.log(obj1[country][index][key])
-                        flag=false;
-                    }
-                   
+    for (var countryIndex = 0; countryIndex < countries.length; countryIndex++ ) {
+        var country = countries[countryIndex];
+        for (let index = 0; index < obj1[country].length; index++) {
+            console.log(obj2[country])
+            for(key in obj1[country][index]) {
+                if(obj1[country][index][key] != obj2[country][index][key]) {
+                    console.log(obj1[country][index][key])
+                    differenceResults.push(obj1[country][index][key])
                 }
+                
             }
         }
-        
     }
-    else {
-        console.log("in the other else statement")
-        flag=false;
-    }
-
-    return flag
+    
+    
+    return differenceResults
 }
 
 exports.write_to_results_if_new_item = function(current_results, countries) {
