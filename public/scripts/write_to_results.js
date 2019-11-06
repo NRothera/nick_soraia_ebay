@@ -1,6 +1,4 @@
 var fs = require('fs');
-var previousResults = require("../../results.json")
-
 
 write_to_results = function(results) {
     var resultsJson = JSON.stringify(results)
@@ -23,13 +21,11 @@ compare_two_objects = function(obj1, obj2, countries) {
     if(Object.keys(obj1).length ===  Object.keys(obj2).length){
         for (var countryIndex = 0; countryIndex < countries.length; countryIndex++ ) {
             var country = countries[countryIndex];
-         
             for (let index = 0; index < obj1[country].length; index++) {
-                
                 console.log(obj2[country])
                 for(key in obj1[country][index]) {
                     if(obj1[country][index][key] != obj2[country][index][key]) {
-                       
+                        console.log(obj1[country][index][key])
                         flag=false;
                     }
                    
@@ -42,6 +38,7 @@ compare_two_objects = function(obj1, obj2, countries) {
         console.log("in the other else statement")
         flag=false;
     }
+
     return flag
 }
 
