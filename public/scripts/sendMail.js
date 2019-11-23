@@ -1,32 +1,39 @@
-var mailer = require("nodemailer");
+var nodemailer = require('nodemailer');
+const dotenv = require('dotenv').config();
 
-// Use Smtp Protocol to send Email
-var smtpTransport = mailer.createTransport({
-    service: "Gmail",
-    auth: {
-       
+// Create the transporter with the required configuration for Outlook
+// change the user and pass !
+
+
+
+ createAndSendMail = function(text) {
+
+    var transporter = nodemailer.createTransport({
+        service: "smtp.gmail.com",
+        port: 465,
+        auth: {
+            user: "nickrothera@gmail.com",
+            pass: process.env.EMAIL_PASSWORD
+
+        }
+    })
+
+// setup e-mail data, even with unicode symbols
+
+    const mailOptions = {
+        from: '"SomeName"<nickrothera@gmail.com>', // TODO replace this with your own email
+        to: 'nickrothera@hotmail.co.uk', // TODO: the receiver email has to be authorized for the free tier
+        subject: 'test email',
+        text: 'please work'
     }
-});
 
-function createMessage(results) {
-    var mail = {
-        from: "Nick Rothera <nickrothera@gmail.com>",
-        to: "nickrothera@gmail.com",
-        subject: "Send Email Using Node.js",
-        text: "hello",
-        html: "<b>Node.js New world for me</b>"
-    }
-
-    return mail
-    
+    transporter.sendMail(mailOptions, function (err, data) {
+        if (err) {
+            return (err, null);
+        }
+        return (null, data);
+    })
 }
 
-exports.sendEmail(result) = smtpTransport.sendMail(createMessage(result), function(error, response){
-    if(error){
-        console.log(error);
-    }else{
-        console.log("Message sent: " + response.message);
-    }
+module.exports = createAndSendMail;
 
-    smtpTransport.close();
-});

@@ -1,4 +1,5 @@
 var fs = require('fs');
+var mailer = require('./sendMail')
 
 write_to_results = function(results) {
     var resultsJson = JSON.stringify(results)
@@ -14,6 +15,14 @@ get_json_results = function() {
     return results
 }
 
+write_new_results_to_new_results_file = function(newResults){
+    var resultsJson = JSON.stringify(newResults)
+    fs.writeFileSync('new_results.json', resultsJson, (err) => {
+        if (err) throw err;
+        console.log('Data written to file');
+    });
+}
+
 
 compare_two_objects = function(obj1, obj2, countries) {
     var flag=true;
@@ -22,18 +31,19 @@ compare_two_objects = function(obj1, obj2, countries) {
     for (var countryIndex = 0; countryIndex < countries.length; countryIndex++ ) {
         var country = countries[countryIndex];
         for (let index = 0; index < obj1[country].length; index++) {
-            console.log(obj2[country])
+            // console.log(obj2[country])
             for(key in obj1[country][index]) {
                 if(obj1[country][index][key] != obj2[country][index][key]) {
                     console.log(obj1[country][index][key])
-                    differenceResults.push(obj1[country][index][key])
+                    differenceResults.push(obj1[country][index])
+                    break;
                 }
                 
             }
         }
     }
     
-    
+    write_new_results_to_new_results_file(differenceResults)
     return differenceResults
 }
 
@@ -46,5 +56,5 @@ exports.write_to_results_if_new_item = function(current_results, countries) {
     } else{
         write_to_results(current_results)
     }
-    
+    return same_results
 }

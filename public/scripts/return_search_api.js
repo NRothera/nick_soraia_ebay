@@ -118,7 +118,6 @@ var items = require('../../controllers/search_criteria_controller')
           "buyNow": result["listingInfo"][0]["buyItNowAvailable"][0], "endDate": result["listingInfo"][0]["endTime"][0], 
           "condition": result["condition"][0]["conditionDisplayName"][0], "url": result["viewItemURL"][0]});
           ids.push(result["itemId"][0])
-            console.log(result_object)
           }
           // console.log(price)
           index += 1

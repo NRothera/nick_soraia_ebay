@@ -14,6 +14,7 @@ var countryList = ["AU", "FR", "ES", "GB", "US"]
 
  var filtered_result = search.getAndFilterApi(countryList);
 
+
     // })();    
 
 //set up template engine
@@ -33,3 +34,5 @@ if (false) {
 app.listen(process.env.PORT || 8989, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
+
+  
